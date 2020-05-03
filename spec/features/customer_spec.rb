@@ -70,7 +70,7 @@ feature "Customers", type: :feature do
   end
 
   scenario 'Clica no link Mostrar da Index' do
-    customer = create(:customer)
+    create(:customer)
 
     visit(customers_path)
     find(:xpath, "/html/body/table/tbody/tr[1]/td[2]/a").click
@@ -78,11 +78,21 @@ feature "Customers", type: :feature do
   end
 
   scenario 'Clica no link Editar da Index' do
-    customer = create(:customer)
+    create(:customer)
 
     visit(customers_path)
     find(:xpath, "/html/body/table/tbody/tr[1]/td[3]/a").click
     expect(page).to have_content("Editando Cliente")
+  end
+
+  scenario 'Apaga um cliente', js: true do
+    create(:customer)
+
+    visit(customers_path)
+    find(:xpath, "/html/body/table/tbody/tr[1]/td[4]/a").click
+    1.second
+    page.driver.browser.switch_to.alert.accept
+    expect(page).to have_content('Cliente excluído com sucesso!')
   end
 
 end
