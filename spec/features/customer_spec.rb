@@ -48,4 +48,13 @@ feature "Customers", type: :feature do
     expect(page).to have_content(customer.phone)
   end
 
+  scenario 'Testando a Index' do
+    customer1 = create(:customer)
+
+    customer2 = create(:customer)
+
+    visit(customers_path)
+    expect(page).to have_content(customer1.name).and have_content(customer2.name)
+  end
+
 end

@@ -1,6 +1,8 @@
 class CustomersController < ApplicationController
+  before_action :set_customer, only: [:edit, :update, :show, :destroy]
+
   def index
-  
+    @customers = Customer.all
   end
   
   def new
