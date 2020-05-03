@@ -40,4 +40,12 @@ feature "Customers", type: :feature do
     expect(page).to have_content('não pode ficar em branco')
   end
 
+  scenario 'Mostrar um cliente' do
+    customer = create(:customer)
+    visit(customer_path(customer.id))
+    expect(page).to have_content(customer.name)
+    expect(page).to have_content(customer.email)
+    expect(page).to have_content(customer.phone)
+  end
+
 end
