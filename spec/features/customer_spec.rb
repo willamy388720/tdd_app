@@ -69,4 +69,20 @@ feature "Customers", type: :feature do
     expect(page).to have_content(new_name)
   end
 
+  scenario 'Clica no link Mostrar da Index' do
+    customer = create(:customer)
+
+    visit(customers_path)
+    find(:xpath, "/html/body/table/tbody/tr[1]/td[2]/a").click
+    expect(page).to have_content("Mostrando Cliente")
+  end
+
+  scenario 'Clica no link Editar da Index' do
+    customer = create(:customer)
+
+    visit(customers_path)
+    find(:xpath, "/html/body/table/tbody/tr[1]/td[3]/a").click
+    expect(page).to have_content("Editando Cliente")
+  end
+
 end
